@@ -78,8 +78,8 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>$(SolutionDir)\ModelingApp\linking\include;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
-    <LibraryPath>$(SolutionDir)\ModelingApp\linking\lib;$(VC_LibraryPath_x64);$(WindowsSDK_LibraryPath_x64)</LibraryPath>
+    <IncludePath>$(SolutionDir)\ModelingApp\Linking\include;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
+    <LibraryPath>$(SolutionDir)\ModelingApp\Linking\lib;$(VC_LibraryPath_x64);$(WindowsSDK_LibraryPath_x64)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
@@ -142,18 +142,24 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="IO\screen.cpp" />
+    <ClCompile Include="src\glad.c" />
     <ClCompile Include="src\main.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="linking\include\glad\glad.h" />
-    <ClInclude Include="linking\include\GLFW\glfw3.h" />
-    <ClInclude Include="linking\include\GLFW\glfw3native.h" />
-    <ClInclude Include="linking\include\KHR\khrplatform.h" />
+    <ClInclude Include="IO\screen.h" />
+    <ClInclude Include="Linking\include\glad\glad.h" />
+    <ClInclude Include="Linking\include\GLFW\glfw3.h" />
+    <ClInclude Include="Linking\include\GLFW\glfw3native.h" />
+    <ClInclude Include="Linking\include\KHR\khrplatform.h" />
   </ItemGroup>
   <ItemGroup>
-    <Library Include="linking\lib\GLFW\glfw3.lib" />
-    <Library Include="linking\lib\GLFW\glfw3dll.lib" />
-    <Library Include="linking\lib\GLFW\glfw3_mt.lib" />
+    <Library Include="Linking\lib\GLFW\glfw3.lib" />
+    <Library Include="Linking\lib\GLFW\glfw3dll.lib" />
+    <Library Include="Linking\lib\GLFW\glfw3_mt.lib" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="src\glfw3.dll" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

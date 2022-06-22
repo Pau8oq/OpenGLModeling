@@ -159,6 +159,8 @@
     <Library Include="Linking\lib\GLFW\glfw3_mt.lib" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="assets\shaders\fragment.shader" />
+    <None Include="assets\shaders\vertex.shader" />
     <None Include="src\glfw3.dll" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

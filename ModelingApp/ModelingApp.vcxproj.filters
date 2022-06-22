@@ -49,5 +49,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="src\glfw3.dll" />
+    <None Include="assets\shaders\vertex.shader" />
+    <None Include="assets\shaders\fragment.shader" />
   </ItemGroup>
 </Project>

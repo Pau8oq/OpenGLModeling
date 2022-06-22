@@ -142,11 +142,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Graphics\shader.cpp" />
     <ClCompile Include="IO\screen.cpp" />
     <ClCompile Include="src\glad.c" />
     <ClCompile Include="src\main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Graphics\shader.h" />
     <ClInclude Include="IO\screen.h" />
     <ClInclude Include="Linking\include\glad\glad.h" />
     <ClInclude Include="Linking\include\GLFW\glfw3.h" />

@@ -142,11 +142,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Graphics\shader.cpp" />
     <ClCompile Include="IO\screen.cpp" />
     <ClCompile Include="src\glad.c" />
     <ClCompile Include="src\main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Graphics\shader.h" />
     <ClInclude Include="IO\screen.h" />
     <ClInclude Include="Linking\include\glad\glad.h" />
     <ClInclude Include="Linking\include\GLFW\glfw3.h" />
@@ -159,6 +161,8 @@
     <Library Include="Linking\lib\GLFW\glfw3_mt.lib" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="assets\shaders\fragment.shader" />
+    <None Include="assets\shaders\vertex.shader" />
     <None Include="src\glfw3.dll" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

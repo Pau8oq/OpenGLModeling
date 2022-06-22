@@ -24,6 +24,9 @@
     <ClCompile Include="IO\screen.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Graphics\shader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Linking\include\glad\glad.h">
@@ -41,6 +44,9 @@
     <ClInclude Include="IO\screen.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Graphics\shader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Library Include="Linking\lib\GLFW\glfw3_mt.lib" />
@@ -49,5 +55,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="src\glfw3.dll" />
+    <None Include="assets\shaders\vertex.shader" />
+    <None Include="assets\shaders\fragment.shader" />
   </ItemGroup>
 </Project>

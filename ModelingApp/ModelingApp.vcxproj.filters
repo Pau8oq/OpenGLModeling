@@ -27,6 +27,12 @@
     <ClCompile Include="Graphics\shader.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\stb.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphics\texture.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Linking\include\glad\glad.h">
@@ -47,6 +53,12 @@
     <ClInclude Include="Graphics\shader.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Linking\include\stb\stb_image.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics\texture.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Library Include="Linking\lib\GLFW\glfw3_mt.lib" />
@@ -57,5 +69,13 @@
     <None Include="src\glfw3.dll" />
     <None Include="assets\shaders\vertex.shader" />
     <None Include="assets\shaders\fragment.shader" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="assets\Textures\wall.jpg">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="assets\Textures\wood.jpg">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
 </Project>

@@ -143,17 +143,21 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Graphics\shader.cpp" />
+    <ClCompile Include="Graphics\texture.cpp" />
     <ClCompile Include="IO\screen.cpp" />
     <ClCompile Include="src\glad.c" />
     <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\stb.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Graphics\shader.h" />
+    <ClInclude Include="Graphics\texture.h" />
     <ClInclude Include="IO\screen.h" />
     <ClInclude Include="Linking\include\glad\glad.h" />
     <ClInclude Include="Linking\include\GLFW\glfw3.h" />
     <ClInclude Include="Linking\include\GLFW\glfw3native.h" />
     <ClInclude Include="Linking\include\KHR\khrplatform.h" />
+    <ClInclude Include="Linking\include\stb\stb_image.h" />
   </ItemGroup>
   <ItemGroup>
     <Library Include="Linking\lib\GLFW\glfw3.lib" />
@@ -164,6 +168,10 @@
     <None Include="assets\shaders\fragment.shader" />
     <None Include="assets\shaders\vertex.shader" />
     <None Include="src\glfw3.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="assets\Textures\wall.jpg" />
+    <Image Include="assets\Textures\wood.jpg" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

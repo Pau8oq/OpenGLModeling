@@ -5,8 +5,10 @@
 
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
+#include <stb/stb_image.h>
 
 #include "../Graphics/shader.h"
+#include "../Graphics/texture.h"
 
 #include "../IO/screen.h"
 
@@ -16,10 +18,10 @@ void process_input(GLFWwindow* window);
 Screen screen;
 
 float vertices[] = {
-	 0.5f,  0.5f, 0.0f,  
-	 0.5f, -0.5f, 0.0f, 
-	-0.5f, -0.5f, 0.0f,  
-	-0.5f,  0.5f, 0.0f 
+		0.5f,  0.5f, 0.0f,  1.0f, 1.0f, 
+		0.5f, -0.5f, 0.0f,  1.0f, 0.0f, 
+	   -0.5f, -0.5f, 0.0f,  0.0f, 0.0f, 
+	   -0.5f,  0.5f, 0.0f,  0.0f, 1.0f  
 };
 
 unsigned int indices[] =
@@ -57,6 +59,8 @@ int main()
 
 	Shader shader("assets/shaders/vertex.shader", "assets/shaders/fragment.shader");
 
+	Texture texture1("assets/Textures/wood.jpg", "texture1");
+	Texture texture2("assets/Textures/wall.jpg", "texture2");
 	
 	unsigned int VAO;
 	unsigned int VBO;
@@ -73,12 +77,19 @@ int main()
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
 
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)0);
 	glEnableVertexAttribArray(0);
 
+	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)(3 * sizeof(float)));
+	glEnableVertexAttribArray(1);	
 
 	//glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 	//glPolygonMode(GL_FRONT_AND_BACK, GL_POINT);
+
+
+	shader.active();
+	shader.setInt("texture1", 0);
+	shader.setInt("texture2", 1);
 
 	while (!screen.shouldClose())
 	{
@@ -87,6 +98,10 @@ int main()
 		//process_input(window);
 
 		shader.active();
+
+		texture1.active_bind();
+		texture2.active_bind();
+
 		glBindVertexArray(VAO);
 		//glDrawArrays(GL_TRIANGLES, 0, 3);
 		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);

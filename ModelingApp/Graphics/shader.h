@@ -14,6 +14,7 @@ public:
 
 	void active();
 	void clear();
+	void setInt(const std::string& name, int value);
 
 private:
 	void generate(const char* vertexShaderPath, const char* fragmentShaderPath);

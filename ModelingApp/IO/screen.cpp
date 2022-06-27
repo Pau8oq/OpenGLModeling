@@ -1,4 +1,6 @@
 #include "screen.h"
+#include "mouse.h"
+#include "keyboard.h"
 
 unsigned int Screen::SCR_WIDTH = 800;
 unsigned int Screen::SCR_HEIGTH = 600;
@@ -34,6 +36,12 @@ void Screen::setParameters()
 {
 	glViewport(0, 0, SCR_WIDTH, SCR_HEIGTH);
 	glfwSetWindowSizeCallback(window, Screen::framebuffer_size_callback);
+
+	glfwSetCursorPosCallback(window, Mouse::cursorPosCallback);
+	glfwSetMouseButtonCallback(window, Mouse::mouseButtonCallback);
+	glfwSetScrollCallback(window, Mouse::mouseWheelCallback);
+
+	glfwSetKeyCallback(window, Keyboard::keyCallback);
 
 	glEnable(GL_DEPTH_TEST);
 }

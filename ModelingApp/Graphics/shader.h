@@ -4,6 +4,8 @@
 #include <fstream>
 #include <sstream>
 #include <glad/glad.h>
+#include <glm/glm.hpp>
+#include <glm/gtc/type_ptr.hpp>
 
 class Shader
 {
@@ -15,6 +17,7 @@ public:
 	void active();
 	void clear();
 	void setInt(const std::string& name, int value);
+	void setMat4(const std::string& name, glm::mat4 value);
 
 private:
 	void generate(const char* vertexShaderPath, const char* fragmentShaderPath);

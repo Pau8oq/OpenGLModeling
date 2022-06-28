@@ -144,6 +144,7 @@
   <ItemGroup>
     <ClCompile Include="Graphics\shader.cpp" />
     <ClCompile Include="Graphics\texture.cpp" />
+    <ClCompile Include="IO\camera.cpp" />
     <ClCompile Include="IO\keyboard.cpp" />
     <ClCompile Include="IO\mouse.cpp" />
     <ClCompile Include="IO\screen.cpp" />

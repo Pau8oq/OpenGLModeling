@@ -14,14 +14,15 @@
 #include "../Graphics/texture.h"
 
 #include "../IO/screen.h"
+#include "../IO/keyboard.h"
+#include "../IO/mouse.h"
+#include "../IO/camera.h"
 
 
-void process_input(GLFWwindow* window);
-
-Screen screen;
+void process_input(double dt);
 
 float vertices[] = {
-		 -0.5f, -0.5f, -0.5f,  0.0f, 0.0f,
+	-0.5f, -0.5f, -0.5f,  0.0f, 0.0f,
 	 0.5f, -0.5f, -0.5f,  1.0f, 0.0f,
 	 0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
 	 0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
@@ -69,6 +70,12 @@ unsigned int indices[] =
 	0, 1, 3,
 	1, 2, 3
 };
+
+double deltaTime = 0.0f;
+double lastFrame = 0.0f;
+
+Screen screen;
+Camera camera(glm::vec3(0.0f, 0.0f, -3.0f));
 
 int main()
 {
@@ -133,21 +140,21 @@ int main()
 
 	while (!screen.shouldClose())
 	{
+		double currentTime = glfwGetTime();
+		deltaTime = currentTime - lastFrame;
+		lastFrame = currentTime;
+
 		screen.update();
 
-		//process_input(window);
+		process_input(deltaTime);
 
 		shader.active();
 
 		texture1.active_bind();
 
 		glm::mat4 model = glm::mat4(1.0f);
-		model = glm::rotate(model, (float)glfwGetTime() * glm::radians(50.0f), glm::vec3(0.5f, 1.0f, 0.0f));
-
-		glm::mat4 view = glm::mat4(1.0f);
-		view = glm::translate(view, glm::vec3(0.0f, 0.0f, -3.0f));
-
-		glm::mat4 proj = glm::perspective(glm::radians(45.0f), float(screen.SCR_WIDTH / screen.SCR_HEIGTH), 0.1f, 100.f);
+		glm::mat4 view = camera.getViewMatrix();
+		glm::mat4 proj = glm::perspective(camera.getFov(), float(screen.SCR_WIDTH / screen.SCR_HEIGTH), 0.1f, 100.f);
 
 		shader.setMat4("model", model);
 		shader.setMat4("view", view);
@@ -171,12 +178,41 @@ int main()
 	return 0;
 }
 
-void process_input(GLFWwindow* window)
+void process_input(double dt)
 {
-	if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
+	if (Keyboard::key(GLFW_KEY_ESCAPE))
 	{
-		glfwSetWindowShouldClose(window, true);
+		screen.setShouldClose(true);
 	}
 
+	double dx = Mouse::getMouseDx();
+	double dy = Mouse::getMouseDy();
+	double scrollDy = Mouse::getScrollDy();
+
+	if (Mouse::button(GLFW_MOUSE_BUTTON_LEFT) && (dx != 0 || dy != 0))
+	{
+		camera.updateCameraDirection(dx, dy);
+	}
+
+	if (scrollDy != 0)
+		camera.updateCameraZoom(scrollDy);
+	
+
+	if (Keyboard::key(GLFW_KEY_W))
+	{
+		camera.updateCameraPos(CameraDirection::FORWARD, dt);
+	}
+	if (Keyboard::key(GLFW_KEY_S))
+	{
+		camera.updateCameraPos(CameraDirection::BACKWARD, dt);
+	}
+	if (Keyboard::key(GLFW_KEY_A))
+	{
+		camera.updateCameraPos(CameraDirection::LEFT, dt);
+	}
+	if (Keyboard::key(GLFW_KEY_D))
+	{
+		camera.updateCameraPos(CameraDirection::RIGHT, dt);
+	}
 
 }

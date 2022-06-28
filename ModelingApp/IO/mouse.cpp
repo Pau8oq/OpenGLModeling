@@ -3,7 +3,16 @@
 double Mouse::x = 0;
 double Mouse::y = 0;
 
-float Mouse::sensitivity = 0.05f;
+double Mouse::dx = 0;
+double Mouse::dy = 0;
+
+double Mouse::lastX = 0;
+double Mouse::lastY = 0;
+
+double Mouse::scrollDx = 0;
+double Mouse::scrollDy = 0;
+
+float Mouse::sensitivity = 0.1f;
 bool Mouse::firstMouse = true;
 
 bool Mouse::activeButtons[GLFW_MOUSE_BUTTON_LAST] = { 0 };
@@ -14,11 +23,14 @@ void Mouse::cursorPosCallback(GLFWwindow* window, double xpos, double ypos)
 	x = xpos;
 	y = ypos;
 
-	dx = xpos - x;
-	dy = y - ypos; //inverted
+	dx = x - lastX;
+	dy = lastY - y; //inverted
 
 	dx *= sensitivity;
 	dy *= sensitivity;
+
+	lastX = x;
+	lastY = y;
 }
 
 void Mouse::mouseWheelCallback(GLFWwindow* window, double xoffset, double yoffset)
@@ -54,6 +66,20 @@ double Mouse::getMouseX()
 double Mouse::getMouseY()
 {
 	return y;
+}
+
+double Mouse::getMouseDx()
+{
+	double _dx = dx;
+	dx = 0;
+	return _dx;
+}
+
+double Mouse::getMouseDy()
+{
+	double _dy = dy;
+	dy = 0;
+	return _dy;
 }
 
 double Mouse::getScrollDx()

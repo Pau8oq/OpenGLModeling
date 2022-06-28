@@ -15,6 +15,8 @@ public:
 	
 	static double getMouseX();
 	static double getMouseY();
+	static double getMouseDx();
+	static double getMouseDy();
 	static double getScrollDx();
 	static double getScrollDy();
 
@@ -26,10 +28,16 @@ public:
 private:
 	static double x;
 	static double y;
+
 	static double dx;
 	static double dy;
+
+	static double lastX;
+	static double lastY;
+
 	static double scrollDx;
 	static double scrollDy;
+
 	static bool activeButtons[];
 	static bool changedButtons[];
 	static bool firstMouse;

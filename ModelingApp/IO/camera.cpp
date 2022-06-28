@@ -8,9 +8,9 @@ Camera::Camera(glm::vec3 pos)
 	worldUp = glm::vec3(0.0f, 1.0f, 0.0f);
 	speed = 2.5f;
 	fov = 45.0f;
-	//as we want front.z to be 1, sin(0) = 0, sin(90) = 1
-	yaw = 90.0f; 
-	pitch = 0.0f;
+
+	initYaw();
+	initPitch();
 
 	updateCameraVectors();
 }
@@ -26,6 +26,39 @@ void Camera::updateCameraVectors()
 	front = glm::normalize(direction);
 	right = glm::normalize(glm::cross(front, worldUp));
 	up = glm::normalize(glm::cross(right, front));
+}
+
+void Camera::initYaw()
+{
+	//as we want front.z to be 1, sin(0) = 0, sin(90) = 1
+	yaw = 90.0f;
+
+	glm::vec3 default_pos(0.0f, 0.0f, -1.0f);
+	glm::vec3 yaw_pos(pos.x, 0.0f, pos.z);
+
+	glm::vec3 vectorA = glm::normalize(target - yaw_pos);
+	glm::vec3 vectorB = glm::normalize(target - default_pos);
+
+	float radians = glm::acos(glm::dot(vectorA, vectorB));
+	float degrees = glm::degrees(radians);
+
+	yaw += degrees;
+}
+
+void Camera::initPitch()
+{
+	pitch = 0.0f;
+
+	glm::vec3 default_pos(0.0f, 0.0f, -1.0f);
+	glm::vec3 pitch_pos(0.0f, pos.y, pos.z);
+
+	glm::vec3 vectorA = glm::normalize(target - pitch_pos);
+	glm::vec3 vectorB = glm::normalize(target - default_pos);
+
+	float radians = glm::acos(glm::dot(vectorA, vectorB));
+	float degrees = glm::degrees(radians);
+
+	pitch += pos.y > 0 ? -1 * degrees : degrees;
 }
 
 void Camera::updateCameraDirection(double dx, double dy)

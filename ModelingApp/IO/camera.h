@@ -40,4 +40,6 @@ private:
 	float speed;
 
 	void updateCameraVectors();
+	void initYaw();
+	void initPitch();
 };

@@ -1,8 +1,8 @@
 #include "camera.h"
 #include <iostream>
 
-Camera::Camera(glm::vec3 pos)
-	:pos(pos)
+Camera::Camera(glm::vec3 pos, CameraType cameraType)
+	:pos(pos), cameraType(cameraType)
 {
 	target = glm::vec3(0.0f, 0.0f, 0.0f);
 	worldUp = glm::vec3(0.0f, 1.0f, 0.0f);
@@ -16,6 +16,31 @@ Camera::Camera(glm::vec3 pos)
 }
 
 void Camera::updateCameraVectors()
+{
+	if (cameraType == CameraType::FPS)
+		updateFPSCameraVectors();
+	else if (cameraType == CameraType::ORBIT)
+		updateORBITCameraVectors();
+}
+
+
+void Camera::updateORBITCameraVectors()
+{
+	float distance = glm::length(pos - target);
+
+	pos.x = glm::cos(glm::radians(yaw)) * glm::cos(glm::radians(pitch));
+	pos.y = -glm::sin(glm::radians(pitch));
+	pos.z = glm::sin(glm::radians(yaw)) * glm::cos(glm::radians(pitch));
+
+	//because pos mormalized
+	pos *= distance;
+
+	front = glm::normalize(target - pos);
+	right = glm::normalize(glm::cross(front, worldUp));
+	up = glm::normalize(glm::cross(right, front));
+}
+
+void Camera::updateFPSCameraVectors()
 {
 	glm::vec3 direction;
 
@@ -33,7 +58,7 @@ void Camera::initYaw()
 	//as we want front.z to be 1, sin(0) = 0, sin(90) = 1
 	yaw = 90.0f;
 
-	glm::vec3 default_pos(0.0f, 0.0f, -1.0f);
+	glm::vec3 default_pos(0.0f, 0.0f, pos.z);
 	glm::vec3 yaw_pos(pos.x, 0.0f, pos.z);
 
 	glm::vec3 vectorA = glm::normalize(target - yaw_pos);
@@ -49,7 +74,7 @@ void Camera::initPitch()
 {
 	pitch = 0.0f;
 
-	glm::vec3 default_pos(0.0f, 0.0f, -1.0f);
+	glm::vec3 default_pos(0.0f, 0.0f, pos.z);
 	glm::vec3 pitch_pos(0.0f, pos.y, pos.z);
 
 	glm::vec3 vectorA = glm::normalize(target - pitch_pos);

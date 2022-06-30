@@ -75,7 +75,7 @@ double deltaTime = 0.0f;
 double lastFrame = 0.0f;
 
 Screen screen;
-Camera camera(glm::vec3(4.0f, 4.0f, -6.0f));
+Camera camera(glm::vec3(0.0f, 3.0f, -3.0f), CameraType::ORBIT);
 
 int main()
 {

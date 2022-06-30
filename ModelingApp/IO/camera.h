@@ -14,10 +14,16 @@ enum class CameraDirection
 	DOWN
 };
 
+enum class CameraType
+{
+	FPS = 0,
+	ORBIT = 1
+};
+
 class Camera
 {
 public:
-	Camera(glm::vec3 pos);
+	Camera(glm::vec3 pos, CameraType cameraType = CameraType::FPS);
 
 	glm::mat4 getViewMatrix();
 	void updateCameraPos(CameraDirection dir, double dt);
@@ -39,7 +45,11 @@ private:
 	float fov;
 	float speed;
 
+	CameraType cameraType;
+
 	void updateCameraVectors();
+	void updateFPSCameraVectors();
+	void updateORBITCameraVectors();
 	void initYaw();
 	void initPitch();
 };

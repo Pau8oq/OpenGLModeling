@@ -142,6 +142,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Graphics\mesh.cpp" />
+    <ClCompile Include="Graphics\model.cpp" />
     <ClCompile Include="Graphics\shader.cpp" />
     <ClCompile Include="Graphics\texture.cpp" />
     <ClCompile Include="IO\camera.cpp" />
@@ -154,6 +156,9 @@
     <ClCompile Include="src\stb.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Graphics\mesh.h" />
+    <ClInclude Include="Graphics\model.h" />
+    <ClInclude Include="Graphics\Models\cube.h" />
     <ClInclude Include="Graphics\shader.h" />
     <ClInclude Include="Graphics\texture.h" />
     <ClInclude Include="IO\camera.h" />

@@ -67,7 +67,7 @@ int main()
 	Cube cube(texture1);
 	cube.init();
 
-	Lamp lamp(glm::vec3(1.0f, 1.0f, 1.0f), glm::vec3(0.0f, 0.2f, 3.0f), glm::vec3(0.1f));
+	Lamp lamp(glm::vec3(1.0f, 1.0f, 1.0f), glm::vec3(0.0f, 0.0f, 3.0f), glm::vec3(0.1f));
 	lamp.init();
 
 	//shader.active();
@@ -107,6 +107,11 @@ int main()
 		lamp_shader.setMat4("projection", proj);
 
 		lamp.render(lamp_shader);
+
+		/*int speed = 100;
+		float x = glm::sin(glm::radians(glfwGetTime() * speed));
+		float z = glm::cos(glm::radians(glfwGetTime() * speed));
+		lamp.pos = glm::vec3(x, 0.0f, z);*/
 		
 		
 		screen.newFrame();

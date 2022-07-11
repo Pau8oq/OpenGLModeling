@@ -30,6 +30,7 @@ public:
 	void updateCameraDirection(double dx, double dy);
 	void updateCameraZoom(double dy);
 	float getFov();
+	glm::vec3 getPos();
 
 private:
 	glm::vec3 pos;

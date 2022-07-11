@@ -15,6 +15,7 @@
 #include "../Graphics/mesh.h"
 #include "../Graphics/model.h"
 #include "../Graphics/Models/cube.h"
+#include "../Graphics/Models/lamp.h"
 
 #include "../IO/screen.h"
 #include "../IO/keyboard.h"
@@ -58,6 +59,7 @@ int main()
 	screen.setParameters();
 
 	Shader shader("assets/shaders/vertex.shader", "assets/shaders/fragment.shader");
+	Shader lamp_shader("assets/shaders/lamp-vertex.shader", "assets/shaders/lamp-fragment.shader");
 
 	Texture texture1("assets/Textures/wood.jpg", "texture1");
 	//Texture texture2("assets/Textures/wall.jpg", "texture2");
@@ -65,11 +67,12 @@ int main()
 	Cube cube(texture1);
 	cube.init();
 
+	Lamp lamp(glm::vec3(1.0f, 1.0f, 1.0f), glm::vec3(0.0f, 0.2f, 3.0f), glm::vec3(0.1f));
+	lamp.init();
 
-	shader.active();
-	shader.setInt("texture1", 0);
+	//shader.active();
+	//shader.setInt("texture1", 0);
 	//shader.setInt("texture2", 1);
-	
 
 	while (!screen.shouldClose())
 	{
@@ -85,16 +88,32 @@ int main()
 		glm::mat4 view = camera.getViewMatrix();
 		glm::mat4 proj = glm::perspective(camera.getFov(), float(screen.SCR_WIDTH / screen.SCR_HEIGTH), 0.1f, 100.f);
 
+		shader.active();
 		shader.setMat4("model", model);
 		shader.setMat4("view", view);
 		shader.setMat4("projection", proj);
+		shader.set3Float("lightColor", lamp.lightColor);
+		shader.set3Float("objectColor", glm::vec3(1.0f, 0.5f, 0.31f));
+		shader.set3Float("lightPos", lamp.pos);
+		shader.set3Float("viewPos", camera.getPos());
+		
 
 		cube.render(shader);
+
+
+		lamp_shader.active();
+		lamp_shader.setMat4("model", model);
+		lamp_shader.setMat4("view", view);
+		lamp_shader.setMat4("projection", proj);
+
+		lamp.render(lamp_shader);
+		
 		
 		screen.newFrame();
 	}
 
 	cube.cleanup();
+	lamp.cleanup();
 	shader.clear();
 
 	glfwTerminate();

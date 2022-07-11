@@ -941,6 +941,9 @@
     <ClInclude Include="Graphics\Models\cube.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Graphics\Models\lamp.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Library Include="Linking\lib\GLFW\glfw3_mt.lib" />
@@ -1359,6 +1362,8 @@
     <None Include="Linking\include\glm\gtx\wrap.inl">
       <Filter>Header Files</Filter>
     </None>
+    <None Include="assets\shaders\lamp-fragment.shader" />
+    <None Include="assets\shaders\lamp-vertex.shader" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="assets\Textures\wall.jpg">

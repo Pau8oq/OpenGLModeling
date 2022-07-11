@@ -14,9 +14,15 @@ std::vector<Vertex> Vertex::genList(float* vertices, unsigned int nVertices)
 			vertices[i * stride + 2]
 		);
 
-		ret[i].texture = glm::vec2(
+		ret[i].normal = glm::vec3(
 			vertices[i * stride + 3],
-			vertices[i * stride + 4]
+			vertices[i * stride + 4],
+			vertices[i * stride + 5]
+		);
+
+		ret[i].texture = glm::vec2(
+			vertices[i * stride + 6],
+			vertices[i * stride + 7]
 		);
 	}
 
@@ -48,8 +54,11 @@ void Mesh::setup()
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)0);
 	glEnableVertexAttribArray(0);
 
-	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)offsetof(Vertex, texture));
+	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)offsetof(Vertex, normal));
 	glEnableVertexAttribArray(1);
+
+	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)offsetof(Vertex, texture));
+	glEnableVertexAttribArray(2);
 
 	glBindVertexArray(0);
 }

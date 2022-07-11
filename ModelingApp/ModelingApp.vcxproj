@@ -159,6 +159,7 @@
     <ClInclude Include="Graphics\mesh.h" />
     <ClInclude Include="Graphics\model.h" />
     <ClInclude Include="Graphics\Models\cube.h" />
+    <ClInclude Include="Graphics\Models\lamp.h" />
     <ClInclude Include="Graphics\shader.h" />
     <ClInclude Include="Graphics\texture.h" />
     <ClInclude Include="IO\camera.h" />
@@ -460,6 +461,8 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="assets\shaders\fragment.shader" />
+    <None Include="assets\shaders\lamp-fragment.shader" />
+    <None Include="assets\shaders\lamp-vertex.shader" />
     <None Include="assets\shaders\vertex.shader" />
     <None Include="Linking\include\glm\detail\func_common.inl" />
     <None Include="Linking\include\glm\detail\func_common_simd.inl" />

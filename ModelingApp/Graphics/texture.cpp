@@ -1,5 +1,7 @@
 #include "texture.h"
 
+Texture::Texture() {}
+
 Texture::Texture(std::string path, std::string name)
 	:path(path), name(name)
 {

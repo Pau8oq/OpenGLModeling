@@ -12,6 +12,7 @@ public:
 	std::string name;
 	std::string path;
 
+	Texture();
 	Texture(std::string path, std::string name);
 
 	void active_bind();

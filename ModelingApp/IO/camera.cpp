@@ -115,6 +115,11 @@ float Camera::getFov()
 	return fov;
 }
 
+glm::vec3 Camera::getPos()
+{
+	return pos;
+}
+
 void Camera::updateCameraZoom(double dy)
 {
 	pos += front * (float)(dy);

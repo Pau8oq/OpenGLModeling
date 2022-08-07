@@ -142,6 +142,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Graphics\light.cpp" />
+    <ClCompile Include="Graphics\material.cpp" />
     <ClCompile Include="Graphics\mesh.cpp" />
     <ClCompile Include="Graphics\model.cpp" />
     <ClCompile Include="Graphics\shader.cpp" />
@@ -156,6 +158,8 @@
     <ClCompile Include="src\stb.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Graphics\light.h" />
+    <ClInclude Include="Graphics\material.h" />
     <ClInclude Include="Graphics\mesh.h" />
     <ClInclude Include="Graphics\model.h" />
     <ClInclude Include="Graphics\Models\cube.h" />

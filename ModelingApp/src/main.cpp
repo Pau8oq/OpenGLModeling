@@ -24,6 +24,8 @@
 
 
 void process_input(double dt);
+void rotateObjYAxis(Cube& obj);
+void rotateObjXAxis(Cube& obj);
 
 double deltaTime = 0.0f;
 double lastFrame = 0.0f;
@@ -64,10 +66,10 @@ int main()
 	Texture texture1("assets/Textures/wood.jpg", "texture1");
 	//Texture texture2("assets/Textures/wall.jpg", "texture2");
 	
-	Cube cube(texture1);
+	Cube cube(Material::gold, texture1);
 	cube.init();
 
-	Lamp lamp(glm::vec3(1.0f, 1.0f, 1.0f), glm::vec3(0.0f, 0.0f, 3.0f), glm::vec3(0.1f));
+	Lamp lamp(glm::vec3(1.0f), glm::vec3(0.2f), glm::vec3(0.5f), glm::vec3(1.0f), glm::vec3(0.0f, 0.0f, 3.0f), glm::vec3(0.1f));
 	lamp.init();
 
 	//shader.active();
@@ -92,12 +94,13 @@ int main()
 		shader.setMat4("model", model);
 		shader.setMat4("view", view);
 		shader.setMat4("projection", proj);
-		shader.set3Float("lightColor", lamp.lightColor);
-		shader.set3Float("objectColor", glm::vec3(1.0f, 0.5f, 0.31f));
-		shader.set3Float("lightPos", lamp.pos);
+
+		lamp.pointLight.render(shader);
+
+
 		shader.set3Float("viewPos", camera.getPos());
 		
-
+	
 		cube.render(shader);
 
 
@@ -108,11 +111,7 @@ int main()
 
 		lamp.render(lamp_shader);
 
-		/*int speed = 100;
-		float x = glm::sin(glm::radians(glfwGetTime() * speed));
-		float z = glm::cos(glm::radians(glfwGetTime() * speed));
-		lamp.pos = glm::vec3(x, 0.0f, z);*/
-		
+		rotateObjYAxis(lamp);
 		
 		screen.newFrame();
 	}
@@ -120,6 +119,7 @@ int main()
 	cube.cleanup();
 	lamp.cleanup();
 	shader.clear();
+	lamp_shader.clear();
 
 	glfwTerminate();
 	return 0;
@@ -162,4 +162,38 @@ void process_input(double dt)
 		camera.updateCameraPos(CameraDirection::RIGHT, dt);
 	}
 
+}
+
+void rotateObjYAxis(Cube& obj)
+{
+	int speed = 100;
+	float x = glm::sin(glm::radians(glfwGetTime() * speed));
+	float z = glm::cos(glm::radians(glfwGetTime() * speed));
+	obj.pos = glm::vec3(x, 0.0f, z);
+
+
+	//TODO: need to check  way of casting and ref and pointers
+	Lamp* l = dynamic_cast<Lamp*>(&obj);
+	
+	if (l != 0)
+	{
+		l->pointLight.position = obj.pos;
+	}
+
+	obj.pos = glm::vec3(x, 0.0f, z);
+}
+
+void rotateObjXAxis(Cube& obj)
+{
+	int speed = 100;
+	float y = glm::sin(glm::radians(glfwGetTime() * speed));
+	float z = glm::cos(glm::radians(glfwGetTime() * speed));
+	obj.pos = glm::vec3(0.0f, y, z);
+
+	Lamp* l = dynamic_cast<Lamp*>(&obj);
+
+	if (l != 0)
+	{
+		l->pointLight.position = obj.pos;
+	}
 }

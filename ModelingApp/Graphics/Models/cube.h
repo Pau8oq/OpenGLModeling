@@ -1,16 +1,19 @@
 #pragma once
 
 #include "../model.h"
+#include "../material.h"
 
 class Cube: public Model
 {
 public:
-	Cube(glm::vec3 pos = glm::vec3(0.0f), glm::vec3 size = glm::vec3(1.0f))
-		:Model(pos, size)
+	Material material;
+
+	Cube(Material material, glm::vec3 pos = glm::vec3(0.0f), glm::vec3 size = glm::vec3(1.0f))
+		:material(material), Model(pos, size)
 	{}
 
-	Cube(Texture texture, glm::vec3 pos = glm::vec3(0.0f), glm::vec3 size = glm::vec3(1.0f))
-		:Model(pos, size), texture(texture)
+	Cube(Material material, Texture texture, glm::vec3 pos = glm::vec3(0.0f), glm::vec3 size = glm::vec3(1.0f))
+		:material(material), Model(pos, size), texture(texture)
 	{}
 
 	void init() override
@@ -70,6 +73,16 @@ public:
 		Mesh mesh(Vertex::genList(vertices, nVertices), indices, { texture });
 
 		meshes.push_back(mesh);
+	}
+
+	void render(Shader shader) override
+	{
+		shader.set3Float("material.ambient", material.ambient);
+		shader.set3Float("material.diffuse", material.diffuse);
+		shader.set3Float("material.specular", material.specular);
+		shader.setFloat("material.shininess", material.shininess);
+
+		Model::render(shader);
 	}
 
 private:

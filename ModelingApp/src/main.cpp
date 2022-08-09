@@ -63,18 +63,19 @@ int main()
 	Shader shader("assets/shaders/vertex.shader", "assets/shaders/fragment.shader");
 	Shader lamp_shader("assets/shaders/lamp-vertex.shader", "assets/shaders/lamp-fragment.shader");
 
-	Texture texture1("assets/Textures/wood.jpg", "texture1");
-	//Texture texture2("assets/Textures/wall.jpg", "texture2");
+	/*Texture texture1("assets/Textures/wood.jpg", "texture1");
+	Texture texture2("assets/Textures/wall.jpg", "texture2");*/
+	Texture deffMap("assets/Textures/diffuseMap.png", "material.diffuse");
+	Texture specMap("assets/Textures/specularMap.png", "material.specular");
+	Texture emission("assets/Textures/matrix.jpg", "material.emission");
+
 	
-	Cube cube(Material::gold, texture1);
+	Cube cube(Material::gold, deffMap, specMap, emission);
 	cube.init();
 
 	Lamp lamp(glm::vec3(1.0f), glm::vec3(0.2f), glm::vec3(0.5f), glm::vec3(1.0f), glm::vec3(0.0f, 0.0f, 3.0f), glm::vec3(0.1f));
 	lamp.init();
 
-	//shader.active();
-	//shader.setInt("texture1", 0);
-	//shader.setInt("texture2", 1);
 
 	while (!screen.shouldClose())
 	{
@@ -111,7 +112,7 @@ int main()
 
 		lamp.render(lamp_shader);
 
-		rotateObjYAxis(lamp);
+		//rotateObjYAxis(lamp);
 		
 		screen.newFrame();
 	}

@@ -607,6 +607,9 @@
     <None Include="src\glfw3.dll" />
   </ItemGroup>
   <ItemGroup>
+    <Image Include="assets\Textures\diffuseMap.png" />
+    <Image Include="assets\Textures\matrix.jpg" />
+    <Image Include="assets\Textures\specularMap.png" />
     <Image Include="assets\Textures\wall.jpg" />
     <Image Include="assets\Textures\wood.jpg" />
   </ItemGroup>

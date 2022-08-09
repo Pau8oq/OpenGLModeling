@@ -1384,5 +1384,14 @@
     <Image Include="assets\Textures\wood.jpg">
       <Filter>Resource Files</Filter>
     </Image>
+    <Image Include="assets\Textures\diffuseMap.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="assets\Textures\specularMap.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="assets\Textures\matrix.jpg">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
 </Project>

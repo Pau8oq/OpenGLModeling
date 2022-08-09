@@ -29,6 +29,9 @@ void Texture::load()
 	case 1:
 		colorMode = GL_RED;
 		break;
+	case 3:
+		colorMode = GL_RGB;
+		break;
 	case 4:
 		colorMode = GL_RGBA;
 		break;
@@ -36,7 +39,7 @@ void Texture::load()
 
 	if (data)
 	{
-		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
+		glTexImage2D(GL_TEXTURE_2D, 0, colorMode, width, height, 0, colorMode, GL_UNSIGNED_BYTE, data);
 		glGenerateMipmap(GL_TEXTURE_2D);
 
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);

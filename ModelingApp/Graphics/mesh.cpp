@@ -67,6 +67,7 @@ void Mesh::render(Shader shader)
 {
 	for (unsigned int i = 0; i < textures.size(); i++)
 	{
+		shader.setInt(textures[i].name, textures[i].id);
 		textures[i].active_bind();
 	}
 

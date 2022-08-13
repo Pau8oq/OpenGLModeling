@@ -73,8 +73,26 @@ int main()
 	Cube cube(Material::gold, deffMap, specMap, emission);
 	cube.init();
 
-	Lamp lamp(glm::vec3(1.0f), glm::vec3(0.2f), glm::vec3(0.5f), glm::vec3(1.0f), glm::vec3(0.0f, 0.0f, 3.0f), glm::vec3(0.1f));
-	lamp.init();
+	DirLight dirLight({ glm::vec3(-0.2f, -1.0f, -0.3f), glm::vec3(0.2f), glm::vec3(0.5f), glm::vec3(1.0f) });
+	PointLight pointLight({ glm::vec3(0.0f, 0.0f, 3.0f), glm::vec3(0.2f), glm::vec3(0.5f), glm::vec3(1.0f), 1.0f,  0.09f, 0.032f });
+	SpotLight spotLight({
+		camera.getPos(),
+		camera.getFront(),
+		glm::cos(glm::radians(7.5f)),
+		glm::cos(glm::radians(13.5f)),
+		glm::vec3(0.2f),
+		glm::vec3(0.5f),
+		glm::vec3(1.0f),
+		1.0f,  0.09f, 0.032f });
+
+	Lamp lamp1(glm::vec3(1.0f), pointLight, glm::vec3(0.0f, 0.0f, 2.0f), glm::vec3(0.1f));
+	lamp1.init();
+	Lamp lamp2(glm::vec3(1.0f), pointLight, glm::vec3(0.0f, 0.0f, -2.0f), glm::vec3(0.1f));
+	lamp2.init();
+
+	Lamp lamps[2];
+	lamps[0] = lamp1;
+	lamps[1] = lamp2;
 
 
 	while (!screen.shouldClose())
@@ -95,9 +113,18 @@ int main()
 		shader.setMat4("model", model);
 		shader.setMat4("view", view);
 		shader.setMat4("projection", proj);
+		shader.setInt("noPointLights", 2);
 
-		lamp.pointLight.render(shader);
 
+		//should add scene class like three js has
+		for (int i = 0; i < 2; i++)
+			lamps[i].pointLight.render(shader, i);
+		
+		dirLight.render(shader);
+		//pointLight.render(shader);
+		spotLight.position = camera.getPos();
+		spotLight.direction = camera.getFront();
+		spotLight.render(shader);
 
 		shader.set3Float("viewPos", camera.getPos());
 		
@@ -110,15 +137,20 @@ int main()
 		lamp_shader.setMat4("view", view);
 		lamp_shader.setMat4("projection", proj);
 
-		lamp.render(lamp_shader);
 
-		//rotateObjYAxis(lamp);
+		for (int i = 0; i < 2; i++)
+			lamps[i].render(lamp_shader);
 		
+
+		//rotateObjYAxis(lamps[0]);
+		//rotateObjXAxis(lamps[1]);
+
 		screen.newFrame();
 	}
 
 	cube.cleanup();
-	lamp.cleanup();
+	for (int i = 0; i < 2; i++)
+		lamps[i].cleanup();
 	shader.clear();
 	lamp_shader.clear();
 

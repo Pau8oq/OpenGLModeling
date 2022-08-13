@@ -120,6 +120,11 @@ glm::vec3 Camera::getPos()
 	return pos;
 }
 
+glm::vec3 Camera::getFront()
+{
+	return front;
+}
+
 void Camera::updateCameraZoom(double dy)
 {
 	pos += front * (float)(dy);

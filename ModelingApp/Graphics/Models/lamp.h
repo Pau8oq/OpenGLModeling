@@ -9,15 +9,21 @@ public:
 
 	PointLight pointLight;
 
+	Lamp() 
+	{
+		lightColor = glm::vec3(1.0f);
+	}
+
 	Lamp(glm::vec3 lightColor,
-		glm::vec3 ambinet,
-		glm::vec3 diffuse,
-		glm::vec3 specular,
+		PointLight _pointLight,
 		glm::vec3 pos = glm::vec3(0.0f),
 		glm::vec3 size = glm::vec3(1.0f))
 		:lightColor(lightColor),
-		pointLight({ pos, ambinet, diffuse, specular }),
-		Cube(Material::white_plastic, pos, size) {}
+		Cube(Material::white_plastic, pos, size) 
+	{
+		pointLight = _pointLight;
+		pointLight.position = pos;
+	}
 
 	void render(Shader shader) override
 	{

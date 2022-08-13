@@ -8,6 +8,11 @@ class Cube: public Model
 public:
 	Material material;
 
+	Cube() 
+	{
+		material = Material::bronze;
+	}
+
 	Cube(Material material, glm::vec3 pos = glm::vec3(0.0f), glm::vec3 size = glm::vec3(1.0f))
 		:material(material), 
 		Model(pos, size)
@@ -18,12 +23,14 @@ public:
 		Model(pos, size),
 		texture(texture)
 	{}
+
 	Cube(Material material, Texture diffuseMap, Texture specularMap, glm::vec3 pos = glm::vec3(0.0f), glm::vec3 size = glm::vec3(1.0f))
 		:material(material), 
 		Model(pos, size),	
 		diffuseMap(diffuseMap), 
 		specularMap(specularMap)
 	{}
+
 	Cube(Material material, Texture diffuseMap, Texture specularMap, Texture emission, glm::vec3 pos = glm::vec3(0.0f), glm::vec3 size = glm::vec3(1.0f))
 		:material(material),
 		Model(pos, size),

@@ -67,10 +67,10 @@ int main()
 	Texture texture2("assets/Textures/wall.jpg", "texture2");*/
 	Texture deffMap("assets/Textures/diffuseMap.png", "material.diffuse");
 	Texture specMap("assets/Textures/specularMap.png", "material.specular");
-	Texture emission("assets/Textures/matrix.jpg", "material.emission");
+	//Texture emission("assets/Textures/matrix.jpg", "material.emission");
 
 	
-	Cube cube(Material::gold, deffMap, specMap, emission);
+	Cube cube(Material::gold, deffMap, specMap);
 	cube.init();
 
 	DirLight dirLight({ glm::vec3(-0.2f, -1.0f, -0.3f), glm::vec3(0.2f), glm::vec3(0.5f), glm::vec3(1.0f) });

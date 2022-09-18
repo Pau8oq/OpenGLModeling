@@ -961,6 +961,7 @@
     <Library Include="Linking\lib\GLFW\glfw3_mt.lib" />
     <Library Include="Linking\lib\GLFW\glfw3dll.lib" />
     <Library Include="Linking\lib\GLFW\glfw3.lib" />
+    <Library Include="Linking\lib\assimp\assimp-vc143-mtd.lib" />
   </ItemGroup>
   <ItemGroup>
     <None Include="src\glfw3.dll" />
@@ -1376,6 +1377,11 @@
     </None>
     <None Include="assets\shaders\lamp-fragment.shader" />
     <None Include="assets\shaders\lamp-vertex.shader" />
+    <None Include="src\assimp-vc143-mtd.dll" />
+    <None Include="assets\models\eraser\scene.bin">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="assets\models\eraser\scene.gltf" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="assets\Textures\wall.jpg">
@@ -1393,5 +1399,17 @@
     <Image Include="assets\Textures\matrix.jpg">
       <Filter>Resource Files</Filter>
     </Image>
+    <Image Include="assets\models\eraser\textures\Eraser2_baseColor.jpeg">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="assets\models\eraser\textures\Eraser2_metallicRoughness.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="assets\models\eraser\textures\Eraser2_normal.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="assets\models\eraser\license.txt" />
   </ItemGroup>
 </Project>

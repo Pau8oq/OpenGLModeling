@@ -29,8 +29,8 @@ public:
 
 	void render(Shader shader);
 	void cleanup();
-	void setup();
 	
 private:
 	unsigned int VBO, EBO;
+	void setup();
 };

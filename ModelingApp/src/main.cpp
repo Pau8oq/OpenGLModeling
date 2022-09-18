@@ -3,6 +3,7 @@
 #include <fstream>
 #include <sstream>
 
+
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 #include <stb/stb_image.h>
@@ -73,7 +74,10 @@ int main()
 	Cube cube(Material::gold, deffMap, specMap);
 	cube.init();
 
-	DirLight dirLight({ glm::vec3(-0.2f, -1.0f, -0.3f), glm::vec3(0.2f), glm::vec3(0.5f), glm::vec3(1.0f) });
+	Model eraser(glm::vec3(0.0f), glm::vec3(40.0f));
+	eraser.loadModel("assets/models/eraser/scene.gltf");
+
+	DirLight dirLight({ glm::vec3(0.0f, -1.0f, 0.0f), glm::vec3(0.2f), glm::vec3(0.5f), glm::vec3(1.0f) });
 	PointLight pointLight({ glm::vec3(0.0f, 0.0f, 3.0f), glm::vec3(0.2f), glm::vec3(0.5f), glm::vec3(1.0f), 1.0f,  0.09f, 0.032f });
 	SpotLight spotLight({
 		camera.getPos(),
@@ -85,9 +89,9 @@ int main()
 		glm::vec3(1.0f),
 		1.0f,  0.09f, 0.032f });
 
-	Lamp lamp1(glm::vec3(1.0f), pointLight, glm::vec3(0.0f, 0.0f, 2.0f), glm::vec3(0.1f));
+	Lamp lamp1(glm::vec3(1.0f), pointLight, glm::vec3(0.0f, 0.0f, 1.0f), glm::vec3(0.1f));
 	lamp1.init();
-	Lamp lamp2(glm::vec3(1.0f), pointLight, glm::vec3(0.0f, 0.0f, -2.0f), glm::vec3(0.1f));
+	Lamp lamp2(glm::vec3(1.0f), pointLight, glm::vec3(0.0f, 0.0f, -1.0f), glm::vec3(0.1f));
 	lamp2.init();
 
 	Lamp lamps[2];
@@ -113,15 +117,15 @@ int main()
 		shader.setMat4("model", model);
 		shader.setMat4("view", view);
 		shader.setMat4("projection", proj);
-		shader.setInt("noPointLights", 2);
+		//shader.setInt("noPointLights", 2);
 
 
 		//should add scene class like three js has
-		for (int i = 0; i < 2; i++)
-			lamps[i].pointLight.render(shader, i);
+		/*for (int i = 0; i < 2; i++)
+			lamps[i].pointLight.render(shader, i);*/
 		
-		dirLight.render(shader);
-		//pointLight.render(shader);
+		//dirLight.render(shader);
+	    //pointLight.render(shader);
 		spotLight.position = camera.getPos();
 		spotLight.direction = camera.getFront();
 		spotLight.render(shader);
@@ -129,17 +133,17 @@ int main()
 		shader.set3Float("viewPos", camera.getPos());
 		
 	
-		cube.render(shader);
+		//cube.render(shader);
+		eraser.render(shader);
 
-
-		lamp_shader.active();
+		/*lamp_shader.active();
 		lamp_shader.setMat4("model", model);
 		lamp_shader.setMat4("view", view);
 		lamp_shader.setMat4("projection", proj);
 
 
 		for (int i = 0; i < 2; i++)
-			lamps[i].render(lamp_shader);
+			lamps[i].render(lamp_shader);*/
 		
 
 		//rotateObjYAxis(lamps[0]);
@@ -149,6 +153,7 @@ int main()
 	}
 
 	cube.cleanup();
+	eraser.cleanup();
 	for (int i = 0; i < 2; i++)
 		lamps[i].cleanup();
 	shader.clear();

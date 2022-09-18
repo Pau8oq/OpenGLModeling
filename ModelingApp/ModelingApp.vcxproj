@@ -122,7 +122,9 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>GLFW/glfw3.lib;opengl32.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>GLFW\glfw3.lib;assimp\assimp-vc143-mtd.lib;opengl32.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>
+      </AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -459,11 +461,14 @@
     <ClInclude Include="Linking\include\stb\stb_image.h" />
   </ItemGroup>
   <ItemGroup>
+    <Library Include="Linking\lib\assimp\assimp-vc143-mtd.lib" />
     <Library Include="Linking\lib\GLFW\glfw3.lib" />
     <Library Include="Linking\lib\GLFW\glfw3dll.lib" />
     <Library Include="Linking\lib\GLFW\glfw3_mt.lib" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="assets\models\eraser\scene.bin" />
+    <None Include="assets\models\eraser\scene.gltf" />
     <None Include="assets\shaders\fragment.shader" />
     <None Include="assets\shaders\lamp-fragment.shader" />
     <None Include="assets\shaders\lamp-vertex.shader" />
@@ -604,14 +609,21 @@
     <None Include="Linking\include\glm\gtx\vector_angle.inl" />
     <None Include="Linking\include\glm\gtx\vector_query.inl" />
     <None Include="Linking\include\glm\gtx\wrap.inl" />
+    <None Include="src\assimp-vc143-mtd.dll" />
     <None Include="src\glfw3.dll" />
   </ItemGroup>
   <ItemGroup>
+    <Image Include="assets\models\eraser\textures\Eraser2_baseColor.jpeg" />
+    <Image Include="assets\models\eraser\textures\Eraser2_metallicRoughness.png" />
+    <Image Include="assets\models\eraser\textures\Eraser2_normal.png" />
     <Image Include="assets\Textures\diffuseMap.png" />
     <Image Include="assets\Textures\matrix.jpg" />
     <Image Include="assets\Textures\specularMap.png" />
     <Image Include="assets\Textures\wall.jpg" />
     <Image Include="assets\Textures\wood.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="assets\models\eraser\license.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

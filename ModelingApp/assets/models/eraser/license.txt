@@ -1,0 +1,11 @@
+Model Information:
+* title:	some eraser
+* source:	https://sketchfab.com/3d-models/some-eraser-6732042e258b469a84262c07ec5b86a8
+* author:	Artieee (https://sketchfab.com/Artieee)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "some eraser" (https://sketchfab.com/3d-models/some-eraser-6732042e258b469a84262c07ec5b86a8) by Artieee (https://sketchfab.com/Artieee) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)

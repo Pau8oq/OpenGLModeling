@@ -3,8 +3,20 @@
 Texture::Texture() {}
 
 Texture::Texture(std::string path, std::string name)
-	:path(path), name(name)
 {
+	this->path = path;
+	this->name = name;
+
+	generate();
+	load();
+}
+
+Texture::Texture(std::string path, std::string name, aiTextureType type)
+{
+	this->path = path;
+	this->name = name;
+	this->type = type;
+
 	generate();
 	load();
 }
@@ -18,7 +30,8 @@ void Texture::generate()
 void Texture::load()
 {
 	int width, height, nrChannels;
-	stbi_set_flip_vertically_on_load(true);
+	stbi_set_flip_vertically_on_load(false);
+	//stbi_set_flip_vertically_on_load(true); //without assimp
 
 	unsigned char* data = stbi_load(path.c_str(), &width, &height, &nrChannels, 0);
 

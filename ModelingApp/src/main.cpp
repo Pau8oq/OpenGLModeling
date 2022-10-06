@@ -63,6 +63,7 @@ int main()
 
 	Shader shader("assets/shaders/vertex.shader", "assets/shaders/fragment.shader");
 	Shader lamp_shader("assets/shaders/lamp-vertex.shader", "assets/shaders/lamp-fragment.shader");
+	Shader stencilShader("assets/shaders/stencil-vertex.shader", "assets/shaders/stencil-fragment.shader");
 
 	/*Texture texture1("assets/Textures/wood.jpg", "texture1");
 	Texture texture2("assets/Textures/wall.jpg", "texture2");*/
@@ -76,6 +77,8 @@ int main()
 
 	Model eraser(glm::vec3(0.0f), glm::vec3(40.0f));
 	eraser.loadModel("assets/models/eraser/scene.gltf");
+
+	Model eraserStencil = eraser;
 
 	DirLight dirLight({ glm::vec3(0.0f, -1.0f, 0.0f), glm::vec3(0.2f), glm::vec3(0.5f), glm::vec3(1.0f) });
 	PointLight pointLight({ glm::vec3(0.0f, 0.0f, 3.0f), glm::vec3(0.2f), glm::vec3(0.5f), glm::vec3(1.0f), 1.0f,  0.09f, 0.032f });
@@ -111,7 +114,11 @@ int main()
 
 		glm::mat4 model = glm::mat4(1.0f);
 		glm::mat4 view = camera.getViewMatrix();
-		glm::mat4 proj = glm::perspective(camera.getFov(), float(screen.SCR_WIDTH / screen.SCR_HEIGTH), 0.1f, 100.f);
+		glm::mat4 proj = glm::perspective(camera.getFov(), float(screen.SCR_WIDTH / screen.SCR_HEIGTH), 0.1f, 10.f);
+
+		stencilShader.active();
+		stencilShader.setMat4("view", view);
+		stencilShader.setMat4("projection", proj);
 
 		shader.active();
 		shader.setMat4("model", model);
@@ -133,8 +140,32 @@ int main()
 		shader.set3Float("viewPos", camera.getPos());
 		
 	
-		//cube.render(shader);
+
+		//stencil - draw obj as normal, writing to the stencil buffer
+		glStencilFunc(GL_ALWAYS, 1, 0xFF);
+		glStencilMask(0xFF);
+
 		eraser.render(shader);
+
+#pragma region stencil
+		//draw slightly scaled version of model , disable  stencil writing
+		glStencilFunc(GL_NOTEQUAL, 1, 0xFF);
+		glStencilMask(0x00);
+		glDisable(GL_DEPTH_TEST);
+
+		stencilShader.active();
+		float scale = 2.0f;
+		model = glm::scale(model, glm::vec3(scale));
+
+		eraserStencil.size = eraser.size + scale;
+		eraserStencil.render(stencilShader);
+
+		glStencilMask(0xFF);
+		glStencilFunc(GL_ALWAYS, 0, 0xFF);
+		glEnable(GL_DEPTH_TEST);
+#pragma endregion
+
+		
 
 		/*lamp_shader.active();
 		lamp_shader.setMat4("model", model);

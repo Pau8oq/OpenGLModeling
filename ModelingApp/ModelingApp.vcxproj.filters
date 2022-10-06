@@ -1382,6 +1382,8 @@
       <Filter>Resource Files</Filter>
     </None>
     <None Include="assets\models\eraser\scene.gltf" />
+    <None Include="assets\shaders\stencil-fragment.shader" />
+    <None Include="assets\shaders\stencil-vertex.shader" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="assets\Textures\wall.jpg">

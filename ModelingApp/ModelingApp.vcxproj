@@ -472,6 +472,8 @@
     <None Include="assets\shaders\fragment.shader" />
     <None Include="assets\shaders\lamp-fragment.shader" />
     <None Include="assets\shaders\lamp-vertex.shader" />
+    <None Include="assets\shaders\stencil-fragment.shader" />
+    <None Include="assets\shaders\stencil-vertex.shader" />
     <None Include="assets\shaders\vertex.shader" />
     <None Include="Linking\include\glm\detail\func_common.inl" />
     <None Include="Linking\include\glm\detail\func_common_simd.inl" />

@@ -89,7 +89,10 @@ void main()
 	
 	result += CalcSpotLight(spotLight, norm, FragPos, viewDir, diffMap, specMap);
 
-
+	//test z-buffer
+	/*result.z = gl_FragCoord.z;
+	result.x = gl_FragCoord.z;
+	result.y = gl_FragCoord.z;*/
 	FragColor = vec4(result, 1.0);
 
 }
